@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- DEMO: keep this page out of search engines until the owner approves it. Remove this line when it goes live. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Coffizen Coffee Roasters | Burnaby</title>
+<meta name="description" content="Coffee roasted in the shop and pastries baked every morning on Edmonds Street, Burnaby.">
+<meta name="theme-color" content="#ECEEE7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEEE7;      /* cool oat paper */
+    --ink:#1D1B18;        /* logo black */
+    --roast:#4E3325;      /* dark-roast bean */
+    --matcha:#6E8A2F;     /* the matcha bun */
+    --crema:#D8B784;      /* espresso crema */
+    --line:#C9CCC2;
+    --muted:#5D5A54;
+    --w-narrow:"wdth" 68;
+    --w-wide:"wdth" 118;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--matcha);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  @media (max-width:600px){.wrap{padding:0 16px}}
+
+  /* demo notice */
+  .demo{background:var(--roast);color:#F3E9DA;font-size:14px;text-align:center;padding:8px 16px}
+  .demo a{color:var(--crema)}
+
+  /* header */
+  header{border-bottom:1px solid var(--line);position:relative;z-index:3;background:var(--paper)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+  .logo{display:inline-flex;align-items:center;text-decoration:none}
+  /* Their hosted logo is white on transparent; brightness(0) turns it black */
+  .logo img{height:40px;width:auto;filter:brightness(0)}
+  .logo span{font-weight:800;font-variation-settings:var(--w-wide);font-size:22px}
+  nav{display:flex;gap:28px;align-items:center;font-size:15px}
+  nav a{text-decoration:none}
+  nav a:hover{text-decoration:underline;text-underline-offset:4px}
+  .call{background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:600}
+  .call:hover{background:var(--roast);text-decoration:none!important}
+  @media (max-width:720px){nav .hide-sm{display:none}}
+
+  /* hero */
+  .hero-zone{position:relative;overflow:hidden}
+  #beans{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+  .hero{padding:56px 0 64px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:end}
+  .hero-text{position:relative;z-index:2}
+  .eq{font-weight:850;line-height:.86;letter-spacing:-.035em;font-size:clamp(64px,10.5vw,148px)}
+  .eq > span{display:block}
+  .eq .t1{font-variation-settings:var(--w-narrow);color:var(--roast)}
+  .eq .t2{font-variation-settings:var(--w-narrow);color:var(--matcha)}
+  .eq .t3{font-variation-settings:var(--w-wide);color:var(--ink);font-size:.9em;margin-top:.12em}
+  .eq .op{font-weight:300;font-variation-settings:"wdth" 100;margin-right:.08em}
+  .hero-copy{max-width:34ch;margin-top:32px;font-size:19px;color:var(--muted)}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
+  .btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);background:var(--paper)}
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn.solid:hover{background:var(--roast);border-color:var(--roast)}
+  .btn:not(.solid):hover{background:var(--ink);color:var(--paper)}
+  .status{display:flex;align-items:center;gap:8px;font-size:15px;margin-top:22px;color:var(--muted)}
+  .dot{width:10px;height:10px;border-radius:50%;background:#9A968E;flex:none}
+  .dot.open{background:var(--matcha);box-shadow:0 0 0 4px rgba(110,138,47,.2)}
+  /* Empty column the 3D beans tumble in */
+  .bean-space{align-self:stretch;min-height:440px}
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;gap:8px;padding:36px 0 40px}
+    .bean-space{min-height:310px}
+  }
+
+  /* sections */
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  @media (max-width:600px){section{padding:56px 0}}
+  h2{font-weight:800;font-variation-settings:var(--w-wide);font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:14px}
+  .lede{max-width:56ch;color:var(--muted)}
+
+  /* favourites */
+  .fav-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:40px}
+  .fav h3{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:6px}
+  .fav ul{list-style:none}
+  .fav li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:20px;font-weight:600;font-variation-settings:"wdth" 92}
+  .fav li small{font-size:14px;font-weight:400;color:var(--muted);font-variation-settings:"wdth" 100;text-align:right;max-width:22ch}
+  .menu-note{margin-top:28px;font-size:14px;color:var(--muted);background:#E1E4DA;padding:12px 16px;border-radius:8px;max-width:60ch}
+  @media (max-width:720px){.fav-grid{grid-template-columns:1fr;gap:28px}}
+
+  /* our story (from "This Is Us") */
+  .story{background:var(--roast);color:#F3E9DA;border-top:none}
+  .story .lede{color:#D9C8B4}
+  .story-head{max-width:60ch}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 56px;margin-top:44px}
+  .story-grid figure img{border-radius:8px;aspect-ratio:4/5;object-fit:cover;width:100%;background:#3E2A1E}
+  .story-grid h3{font-size:24px;font-weight:700;font-variation-settings:var(--w-wide);margin:22px 0 8px;color:#F3E9DA}
+  .story-grid p{color:#D9C8B4;max-width:46ch}
+  @media (max-width:720px){.story-grid{grid-template-columns:1fr}.story-grid figure img{aspect-ratio:4/3}}
+
+  /* gallery strip */
+  .strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:12px;overflow-x:auto;margin-top:36px;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  @media (max-width:600px){.strip{grid-auto-columns:72%}}
+  .strip figure{scroll-snap-align:start}
+  .strip img{aspect-ratio:3/4;object-fit:cover;width:100%;border-radius:6px;background:#D7D3C8}
+  .strip figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+  .ig{margin-top:24px}
+
+  /* visit + contact */
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:32px}
+  .hours{width:100%;border-collapse:collapse;font-size:17px}
+  .hours td{padding:12px 0;border-bottom:1px solid var(--line)}
+  .hours td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  .hours tr.today td{font-weight:700}
+  .hours tr.today td:first-child::after{content:" (today)";font-weight:400;color:var(--matcha)}
+  .contact{list-style:none;margin-top:28px;font-size:18px}
+  .contact li{padding:10px 0;display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .contact li span{color:var(--muted);font-size:15px}
+  .contact a{font-weight:600}
+  .map{border:0;width:100%;height:100%;min-height:360px;border-radius:8px;background:#D7D3C8}
+  @media (max-width:860px){.visit-grid{grid-template-columns:1fr;gap:32px}.map{min-height:300px}}
+
+  footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--muted)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<div class="demo" role="note">
+  Demo made for Coffizen by Sahan Nonis. This is not the official Coffizen website.
+  <a href="mailto:sahanconnor@gmail.com">Questions? Email me</a>
+</div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Coffizen home">
+      <img src="https://static.wixstatic.com/media/40c255_5cf4be4ef9ee48d6a007362999e98a70~mv2.png/v1/fill/w_420,h_168,al_c,q_90/logo.png"
+           alt="Coffizen Coffee Roasters" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Coffizen'}))">
+    </a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="#favourites">Menu</a>
+      <a class="hide-sm" href="#story">Our story</a>
+      <a class="hide-sm" href="#visit">Visit</a>
+      <a class="call" href="tel:+12364275387">Call us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero-zone">
+    <canvas id="beans" aria-hidden="true"></canvas>
+    <div class="wrap"><div class="hero">
+      <div class="hero-text">
+        <h1 class="eq" aria-label="Coffee plus Citizen equals Coffizen">
+          <span class="t1" aria-hidden="true">Coffee</span>
+          <span class="t2" aria-hidden="true"><span class="op">+</span>Citizen</span>
+          <span class="t3" aria-hidden="true"><span class="op">=</span>Coffizen</span>
+        </h1>
+        <p class="hero-copy">Coffee roasted right here and pastries baked every morning, on Edmonds Street since 2022.</p>
+        <div class="actions">
+          <a class="btn solid" href="https://www.google.com/maps/dir/?api=1&destination=Coffizen+Coffee+Roasters,+7655+Edmonds+St+%23104,+Burnaby,+BC" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn" href="#favourites">See what we make</a>
+        </div>
+        <p class="status"><span class="dot" id="dot"></span><span id="status-text">Open Monday to Saturday</span></p>
+      </div>
+      <div class="bean-space" aria-hidden="true"></div>
+    </div></div>
+  </div>
+
+  <section id="favourites">
+    <div class="wrap">
+      <h2>What people come back for</h2>
+      <p class="lede">A short list of what regulars order most. Drinks are made with beans we roast in the shop, and everything in the case is baked fresh each morning.</p>
+      <div class="fav-grid">
+        <div class="fav">
+          <h3>Drinks</h3>
+          <ul>
+            <li>Iced hazelnut latte <small>The one people come back for the next day</small></li>
+            <li>Latte <small>House-roasted espresso</small></li>
+            <li>Iced Americano</li>
+            <li>Drip coffee <small>Brewed fresh daily</small></li>
+          </ul>
+        </div>
+        <div class="fav">
+          <h3>From the oven</h3>
+          <ul>
+            <li>House cookies <small>The local favourite</small></li>
+            <li>Weird matcha bun <small>Odd shape, real matcha</small></li>
+            <li>Hazelnut bun <small>Crisp outside, soft inside</small></li>
+            <li>Savoury pastries</li>
+          </ul>
+        </div>
+      </div>
+      <p class="menu-note">In the finished site, this becomes your full menu with prices, and you can update it yourself in a couple of minutes.</p>
+    </div>
+  </section>
+
+  <section id="story" class="story">
+    <div class="wrap">
+      <div class="story-head">
+        <h2>Coffee + citizen</h2>
+        <p class="lede">That's where the name comes from: a coffee house for the people of the neighbourhood. Brewing coffee is at the heart of what we do, and since 2022 we've been making every cup the way we'd want it ourselves.</p>
+      </div>
+      <div class="story-grid">
+        <figure>
+          <img loading="lazy" src="https://static.wixstatic.com/media/40c255_3f28902657374bed974327f0a54fc8fd~mv2.jpeg/v1/fill/w_800,h_1000,al_c,q_85,enc_auto/coffee.jpeg" alt="A freshly made Coffizen coffee">
+          <figcaption>
+            <h3>The coffee</h3>
+            <p>We source beans from around the world and roast them here in the shop, from bold and intense to smooth and creamy. Ask at the counter and we'll help you find your cup.</p>
+          </figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://static.wixstatic.com/media/40c255_4b6b4f76a74b435283aac873def8c481~mv2.jpeg/v1/fill/w_800,h_1000,al_c,q_85,enc_auto/bakery.jpeg" alt="Fresh bakes at Coffizen">
+          <figcaption>
+            <h3>The bakery</h3>
+            <p>Everything is baked fresh every morning with good, local ingredients. Our house cookies are the ones neighbours and visitors keep coming back for.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside">
+    <div class="wrap">
+      <h2>Inside Coffizen</h2>
+      <p class="lede">Plenty of seats and window light for reading, studying or catching up.</p>
+      <div class="strip" tabindex="0" aria-label="Photos of Coffizen, scroll sideways">
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_8d9554270a284a9985333ee248b5132f~mv2.jpg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/cafe.jpg" alt="Inside Coffizen: wooden tables and window light"><figcaption>The café</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_982130e1446a430ba8ad8d1aa5545c46~mv2.jpeg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/a.jpg" alt="Barista pouring latte art"><figcaption>Latte art, every cup</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_715c20f92ce742ecbb6d94cb223b88c0~mv2.jpg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/b.jpg" alt="Bakery selection in the case"><figcaption>Today's bake</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_d3cb3be4978e4dc5b87c1c4e8e6eb4e3~mv2.jpeg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/c.jpeg" alt="Window seats"><figcaption>Window seats</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_60382fdac7f34d07a45d779f30d56794~mv2.jpeg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/d.jpeg" alt="Coffee brewing at the counter"><figcaption>Brewed fresh daily</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_3ed4c3257cd44e3d83cb7e237974e160~mv2.jpg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/e.jpg" alt="Cafe racer motorcycle outside the café"><figcaption>Café racer</figcaption></figure>
+        <figure><img loading="lazy" src="https://static.wixstatic.com/media/40c255_78f8ec3017a54df5833b9b0e71713128~mv2.jpg/v1/fill/w_600,h_800,al_c,q_85,enc_auto/f.jpg" alt="The front counter"><figcaption>Say hi at the counter</figcaption></figure>
+      </div>
+      <p class="ig"><a href="https://www.instagram.com/coffizen/" target="_blank" rel="noopener">See more on Instagram @coffizen</a></p>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <h2>Come by or get in touch</h2>
+      <div class="visit-grid">
+        <div>
+          <table class="hours" aria-label="Opening hours">
+            <tbody id="hours">
+              <tr data-d="1"><td>Monday</td><td>9:00 am – 4:30 pm</td></tr>
+              <tr data-d="2"><td>Tuesday</td><td>9:00 am – 4:30 pm</td></tr>
+              <tr data-d="3"><td>Wednesday</td><td>9:00 am – 4:30 pm</td></tr>
+              <tr data-d="4"><td>Thursday</td><td>9:00 am – 4:30 pm</td></tr>
+              <tr data-d="5"><td>Friday</td><td>9:00 am – 4:30 pm</td></tr>
+              <tr data-d="6"><td>Saturday</td><td>10:00 am – 5:30 pm</td></tr>
+              <tr data-d="0"><td>Sunday</td><td>Closed</td></tr>
+            </tbody>
+          </table>
+          <ul class="contact">
+            <li><span>Address</span><a href="https://www.google.com/maps/dir/?api=1&destination=Coffizen+Coffee+Roasters,+7655+Edmonds+St+%23104,+Burnaby,+BC" target="_blank" rel="noopener">7655 Edmonds St #104, Burnaby</a></li>
+            <li><span>Phone</span><a href="tel:+12364275387">(236) 427-5387</a></li>
+            <li><span>Email</span><a href="mailto:coffizen@hotmail.com">coffizen@hotmail.com</a></li>
+            <li><span>Instagram</span><a href="https://www.instagram.com/coffizen/" target="_blank" rel="noopener">@coffizen</a></li>
+          </ul>
+        </div>
+        <iframe class="map" title="Map showing Coffizen on Edmonds Street, Burnaby" loading="lazy"
+          src="https://maps.google.com/maps?q=Coffizen+Coffee+Roasters,+7655+Edmonds+St,+Burnaby,+BC&z=15&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Coffizen Coffee Roasters, Burnaby</span>
+    <span>Demo by Sahan Nonis, not the official site</span>
+  </div>
+</footer>
+
+<!-- Open-now status (Vancouver time) -->
+<script>
+  const H = {1:[540,990],2:[540,990],3:[540,990],4:[540,990],5:[540,990],6:[600,1050]};
+  try{
+    const parts = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Vancouver',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date());
+    const get = t => parts.find(p=>p.type===t).value;
+    const day = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(get('weekday'));
+    const mins = (+get('hour'))*60 + (+get('minute'));
+    const row = document.querySelector(`#hours tr[data-d="${day}"]`);
+    if(row) row.classList.add('today');
+    const fmt = m => { const h=Math.floor(m/60), mm=m%60; return `${(h%12)||12}${mm?':'+String(mm).padStart(2,'0'):''} ${h<12?'am':'pm'}`; };
+    const t = H[day], text = document.getElementById('status-text'), dot = document.getElementById('dot');
+    if(t && mins>=t[0] && mins<t[1]){ dot.classList.add('open'); text.textContent = `Open now until ${fmt(t[1])}`; }
+    else if(t && mins<t[0]){ text.textContent = `Closed now. Opens today at ${fmt(t[0])}`; }
+    else {
+      let n=(day+1)%7; while(!H[n]) n=(n+1)%7;
+      const names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      text.textContent = `Closed now. Opens ${n===(day+1)%7?'tomorrow':names[n]} at ${fmt(H[n][0])}`;
+    }
+  }catch(e){}
+</script>
+
+<!-- 3D coffee beans: a slow tumbling "roaster drum" in the hero. They arrive green and roast to brown on load. -->
+<script type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+  const zone = document.querySelector('.hero-zone');
+  const space = document.querySelector('.bean-space');
+  const canvas = document.getElementById('beans');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
+  } catch (e) { canvas.remove(); throw e; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+
+  const scene = new THREE.Scene();
+  // Beans at the back of the drum fade into the page colour, which gives depth
+  scene.fog = new THREE.Fog(0xECEEE7, 11.6, 18);
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
+  camera.position.set(0, 0, 12);
+
+  scene.add(new THREE.HemisphereLight(0xfff3e0, 0x2b1d15, 1.4));
+  const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(4, 6, 7); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffd9a0, 1.2); rim.position.set(-6, -2, 2); scene.add(rim);
+
+  // A coffee bean: squashed ellipsoid with an S-shaped crease on its flat side
+  function beanGeometry() {
+    const g = new THREE.SphereGeometry(1, 48, 32);
+    const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) {
+      let x = p.getX(i) * 0.64, y = p.getY(i), z = p.getZ(i) * 0.5;
+      if (z > 0) {
+        z *= 0.72;
+        const d = x - 0.07 * Math.sin(y * 3.2);
+        const crease = Math.exp(-(d * d) / 0.0045) * Math.max(0, 1 - Math.abs(y) * 1.05);
+        z -= crease * 0.17;
+      }
+      p.setXYZ(i, x, y, z);
+    }
+    g.computeVertexNormals();
+    return g;
+  }
+  const geo = beanGeometry();
+
+  // Roast colours: green coffee -> cinnamon -> full roast
+  const RAW = new THREE.Color('#AEB585'), MID = new THREE.Color('#B9824A'), DARK = new THREE.Color('#3F2418');
+  const roastColor = (t, out) => t < 0.5 ? out.copy(RAW).lerp(MID, t * 2) : out.copy(MID).lerp(DARK, (t - 0.5) * 2);
+
+  const isPhone = zone.clientWidth < 860;
+  const COUNT = isPhone ? 14 : 22;
+
+  // The drum: a tilted ring of beans that slowly turns
+  const drum = new THREE.Group();
+  scene.add(drum);
+  const beans = [];
+  for (let i = 0; i < COUNT; i++) {
+    const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.4, metalness: 0.04 }));
+    const ring = 0.7 + Math.random() * 0.4;            // distance from the centre (kept clear of the cup)
+    beans.push({
+      m, ring,
+      angle: Math.random() * Math.PI * 2,
+      speed: (0.16 + Math.random() * 0.1) / (0.55 + ring), // inner beans turn a little faster
+      height: (Math.random() - 0.5) * 1.8,
+      bob: Math.random() * Math.PI * 2,
+      size: 0.8 + Math.random() * 0.45,
+      spin: new THREE.Vector3((Math.random() - .5) * 1.2, (Math.random() - .5) * 1.2, (Math.random() - .5) * .8),
+      roastTo: 0.8 + Math.random() * 0.2,                // final shade varies slightly, like a real batch
+      delay: Math.random() * 0.7
+    });
+    m.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6);
+    drum.add(m);
+  }
+
+  // The cup: white ceramic on a saucer, latte-art heart in the crema, beans circling it
+  function latteTexture() {
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const g = c.getContext('2d');
+    const rg = g.createRadialGradient(256, 256, 40, 256, 256, 256);
+    rg.addColorStop(0, '#C89B6A'); rg.addColorStop(0.75, '#9A6A40'); rg.addColorStop(1, '#5E3A22');
+    g.fillStyle = rg; g.fillRect(0, 0, 512, 512);
+    g.fillStyle = '#F4EBDD';
+    g.beginPath();                                   // heart, point toward the handle side
+    g.moveTo(256, 360);
+    g.bezierCurveTo(150, 290, 140, 180, 205, 165);
+    g.bezierCurveTo(240, 158, 256, 185, 256, 205);
+    g.bezierCurveTo(256, 185, 272, 158, 307, 165);
+    g.bezierCurveTo(372, 180, 362, 290, 256, 360);
+    g.fill();
+    g.strokeStyle = '#F4EBDD'; g.lineWidth = 7;      // the pull-through line
+    g.beginPath(); g.moveTo(256, 120); g.lineTo(256, 360); g.stroke();
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  const cup = new THREE.Group();
+  const ceramic = new THREE.MeshStandardMaterial({ color: 0xF7F3EC, roughness: 0.22, metalness: 0, side: THREE.DoubleSide });
+  const profile = [[0,0],[0.62,0],[0.68,0.06],[0.88,0.5],[1.0,1.0],[0.975,1.035],[0.93,1.0],[0.82,0.55],[0.6,0.2],[0,0.2]]
+    .map(([x, y]) => new THREE.Vector2(x, y));
+  cup.add(new THREE.Mesh(new THREE.LatheGeometry(profile, 72), ceramic));
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.27, 0.075, 16, 40, Math.PI * 1.2), ceramic);
+  handle.position.set(0.93, 0.55, 0); handle.rotation.z = -Math.PI * 0.6;
+  cup.add(handle);
+  const coffee = new THREE.Mesh(new THREE.CircleGeometry(0.88, 64), new THREE.MeshStandardMaterial({ map: latteTexture(), roughness: 0.35 }));
+  coffee.rotation.x = -Math.PI / 2; coffee.rotation.z = Math.PI / 2; coffee.position.y = 0.82;
+  cup.add(coffee);
+  const saucer = new THREE.Mesh(new THREE.LatheGeometry(
+    [[0,-0.06],[1.2,-0.06],[1.42,0.02],[1.48,0.07],[1.4,0.06],[1.15,0.0],[0,0.0]].map(([x, y]) => new THREE.Vector2(x, y)), 72), ceramic);
+  cup.add(saucer);
+  cup.rotation.x = 0.28;                             // tip the cup toward us so the latte art shows
+  drum.add(cup);
+
+  // Fit the drum into the empty .bean-space column
+  let R = 1;
+  function layout() {
+    const zr = zone.getBoundingClientRect(), sr = space.getBoundingClientRect();
+    if (!zr.width || !zr.height) return;
+    renderer.setSize(zr.width, zr.height, false);
+    camera.aspect = zr.width / zr.height; camera.updateProjectionMatrix();
+    const H = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
+    const W = H * camera.aspect;
+    const cx = ((sr.left - zr.left + sr.width / 2) / zr.width - 0.5) * W;
+    const cy = -((sr.top - zr.top + sr.height / 2) / zr.height - 0.5) * H;
+    R = Math.min((sr.width / zr.width) * W, (sr.height / zr.height) * H) / 2 * (isPhone ? 0.95 : 0.85);
+    drum.position.set(cx, cy, 0);
+    const s = R * 0.42;
+    cup.scale.setScalar(s);
+    cup.position.set(0, -0.5 * s, 0);
+  }
+  const ro = new ResizeObserver(() => { layout(); if (reduce) requestAnimationFrame(frame); });
+  ro.observe(zone); ro.observe(space);
+  layout();
+
+  let pointerX = 0, pointerY = 0;
+  addEventListener('pointermove', e => { pointerX = e.clientX / innerWidth - 0.5; pointerY = e.clientY / innerHeight - 0.5; }, { passive: true });
+
+  const ROAST_SECONDS = 2.8;
+  const start = performance.now();
+  let last = start, running = true, raf = 0, tiltY = 0, tiltX = 0.38;
+  const tmp = new THREE.Color();
+  const ease = t => 1 - Math.pow(1 - t, 3);
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const t = (now - start) / 1000;
+    for (const b of beans) {
+      if (!reduce) {
+        b.angle += b.speed * dt;
+        b.m.rotation.x += b.spin.x * dt; b.m.rotation.y += b.spin.y * dt; b.m.rotation.z += b.spin.z * dt;
+      }
+      const bob = reduce ? 0 : Math.sin(t * 0.8 + b.bob) * 0.06;
+      b.m.position.set(
+        Math.cos(b.angle) * b.ring * R,
+        (b.height * 0.75 + bob) * R,
+        Math.sin(b.angle) * b.ring * R * 0.8
+      );
+      b.m.scale.setScalar(R * 0.16 * b.size);
+      const r = reduce ? 1 : ease(Math.min(1, Math.max(0, (t - b.delay) / ROAST_SECONDS)));
+      b.m.material.color.copy(roastColor(r * b.roastTo, tmp));
+    }
+    if (!reduce) cup.rotation.y = -0.6 + Math.sin(t * 0.35) * 0.35;   // slow turn so the handle sways
+    else cup.rotation.y = -0.6;
+    // The drum leans slightly toward the mouse
+    tiltY += (pointerX * 0.5 - tiltY) * 0.04;
+    tiltX += (0.38 + pointerY * 0.2 - tiltX) * 0.04;
+    drum.rotation.set(tiltX, tiltY, -0.08);
+    renderer.render(scene, camera);
+    if (running && !reduce) raf = requestAnimationFrame(frame);
+  }
+
+  // Only animate while the hero is on screen and the tab is visible (saves phone battery)
+  const setRunning = on => {
+    if (on && !running) { running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
+    if (!on) { running = false; cancelAnimationFrame(raf); }
+  };
+  new IntersectionObserver(([e]) => setRunning(e.isIntersecting && !document.hidden)).observe(zone);
+  document.addEventListener('visibilitychange', () => setRunning(!document.hidden));
+
+  raf = requestAnimationFrame(frame);
+</script>
+</body>
+</html>
